@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Services\Admin;
 use Services\Admin\NewExam;
+use Services\Admin\CalculateQues;
 use App\Entity\Exam;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,6 +91,11 @@ class AdminController extends AbstractController
   {
     $var = $this->getUser()->getEmail();
     $exam = $em->getRepository(Exam::class)->findBy(['CreatorEmail'=>$var]);
-    return $this->render('admin/ExistingExams.html.twig', array('exam'=> $exam));
+    $noOfQuestions = new CalculateQues();
+    $noOfQues = $noOfQuestions->calNoOfQues($exam, $em);
+    return $this->render('admin/ExistingExams.html.twig', [
+      'exam'=> $exam,
+      'noOfQues'=>$noOfQues,
+    ]);
   }
 }
