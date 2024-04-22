@@ -9,55 +9,30 @@
 <div class="container">
   <div class="exams-created">
     <table>
-    <thead>
-      <td>Exam Name</td>
-      <td>Exam Number</td>
-      <td>Number of Questions</td>
-      <td>Exam Duration</td>
-      <td>Passing Marks</td>
-      <td>Eligibility Marks</td>
-      <td>Created By</td>
-      <td>Operation</td>
-    </thead>
-    {% for examInfo in exam %}
-      <tr>
-        <td>{{examInfo.ExamName}}</td>
-        <td>{{examInfo.ExamNumber}}</td>
-        <td>{{noOfQues[examInfo.ExamNumber]}}</td>
-        <td>{{examInfo.ExamDuration}} hours</td>
-        <td>{{examInfo.PassingMarks}}%</td>
-        <td>{{examInfo.EligibilityMarks}}%</td>
-        <td>{{examInfo.CreatedBy}}</td>
-        <td><a href="{{path('createExam', {'examNumber':examInfo.ExamNumber})}}">Add Question</a></td>
-      </tr>
-    {% endfor %}
+      <thead>
+        <td>Exam Name</td>
+        <td>Exam Number</td>
+        <td>Number of Questions</td>
+        <td>Exam Duration</td>
+        <td>Passing Marks</td>
+        <td>Eligibility Marks</td>
+        <td>Created By</td>
+        <td>Operation</td>
+      </thead>
+      {% for examInfo in exam %}
+        <tr>
+          <td>{{examInfo.ExamName}}</td>
+          <td>{{examInfo.ExamNumber}}</td>
+          <td>{{noOfQues[examInfo.ExamNumber]}}</td>
+          <td>{{examInfo.ExamDuration}} hours</td>
+          <td>{{examInfo.PassingMarks}}%</td>
+          <td>{{examInfo.EligibilityMarks}}%</td>
+          <td>{{examInfo.CreatedBy}}</td>
+          <td><a href="{{path('createExam', {'examNumber':examInfo.ExamNumber})}}">Add Question</a></td>
+        </tr>
+      {% endfor %}
+    </table>
   </div>
-  
-    {# <div class="exams-created">
-      <div class="info">
-        <span>Exam Name: {{examInfo.ExamName}}</span>
-      </div>
-      <div class="info">
-        <span>Exam Number: {{examInfo.ExamNumber}}</span>
-      </div>
-      <div class="info">
-        <span>Exam Duration: {{examInfo.ExamDuration}}</span>
-      </div>
-      <div class="info">
-        <span>Passing Marks: {{examInfo.PassingMarks}}</span>
-      </div>
-      <div class="info">
-        <span>Created By: {{examInfo.CreatedBy}}</span>
-      </div>
-      <div class="info">
-        <span>Eligibility Marks: {{examInfo.EligibilityMarks}}%</span>
-      </div>
-      <div class="info">
-        <span>Creator Email: {{examInfo.CreatorEmail}}</span>
-      </div>
-    </div> #}
-  
-  </table>
   <span><a href="/admin">Go to dashboard</a></span>
 </div>
 {% endblock %}

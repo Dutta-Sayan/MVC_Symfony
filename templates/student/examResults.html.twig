@@ -11,23 +11,21 @@
 
 <div class="container exam-result-container">
   <div class="exams-available">
-  <a href="/logout" class="btn btn-danger float-end">Logout</a><br>
-  <span>Your marks of last exam is {{marks}}</span>
-    <table class="table table-striped table-bordered">
-    <thead>
-      <td>Exam Number</td>
-      <td>Marks</td>
-    </thead>
-    {% for result in results %}
-      <tr>
-        <td>{{result.ExamNumber}}</td>
-        <td>{{result.Marks}}</td>
-      </tr>
-    {% endfor %}
+    <a href="/logout" class="btn btn-danger float-end">Logout</a><br>
+    <span>Your marks of last exam is {{marks}}</span>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <td>Exam Number</td>
+          <td>Marks</td>
+        </thead>
+        {% for result in results %}
+          <tr>
+            <td>{{result.ExamNumber}}</td>
+            <td>{{result.Marks}}</td>
+          </tr>
+        {% endfor %}
+      </table>
   </div>
-  
-  
-  </table>
   <span><a href="/student" class="btn btn-primary float-end dashboard-button">Go back to dashboard</a></span>
 </div>
 {% endblock %}
