@@ -7,7 +7,7 @@
 /public/bundles/
 /var/
 /vendor/
-/assets/images/
+/assets/image/
 .env
 .env.test
 /migrations
