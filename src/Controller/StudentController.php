@@ -76,17 +76,30 @@ class StudentController extends AbstractController
    *  Returns the createProfile page.
    */
   #[Route('/student/profile/createProfile', name: 'create_profile')]
-  public function createProfile(EntityManagerInterface $entityManager): Response
+  public function createProfile(Request $request, EntityManagerInterface $entityManager): Response
   {
+    $errors = "";
+    $post = "";
     if (isset($_POST['submit'])) {
-      $newProfile = new NewProfile($_POST);
+      $post = $request->request->all();
+      $newProfile = new NewProfile($post);
       $email = $this->getUser()->getEmail();
       $name = $this->getUser()->getName();
-      $newProfile->processForm($entityManager, $email, $name);
-      return $this->redirectToRoute('student');
+      $errors = $newProfile->processForm($entityManager, $email, $name);
+      if (empty($errors)) {
+        $this->addFlash('success', 'Profile Set');
+        return $this->redirectToRoute('student');
+      } else {
+        return $this->render('student/createProfile.html.twig', [
+          'errors'=>$errors,
+          'post'=>$post,
+        ]);
+      }
     }
     return $this->render('student/createProfile.html.twig', [
         'controller_name' => 'StudentController',
+        'errors'=>$errors,
+        'post'=>$post,
     ]);
   }
 
@@ -173,7 +186,7 @@ class StudentController extends AbstractController
   {
       $user = $this->getUser();
       $studentRoll = $user->getStudentProfile()->getRollNo();
-      $post =$request->request->all();
+      $post = $request->request->all();
       $submitExam = new SubmitExam($em, $post, $examNumber, $studentRoll);
       $submitExam->processAnswers();
       $computeResult = new ComputeResult($em, $studentRoll);
