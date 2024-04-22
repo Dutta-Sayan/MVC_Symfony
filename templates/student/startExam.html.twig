@@ -14,15 +14,14 @@
       var timer = setInterval(() => {
         if(hours == 0 && minutes == 0 && seconds == 0){
           clearInterval(timer);
-          console.log("end");
-          $(".exam-form").trigger("submit");
+          $("#exam-submit").trigger("click");
         }
-        if(seconds<=0 && hours!=0){
+        if(seconds <= 0 && hours != 0){
           minutes--;
           seconds = 59;
         }
-        if(minutes<=0 && hours!=0){
-          hours=0;
+        if(minutes <= 0 && hours != 0){
+          hours = 0;
           minutes = 0;
           seconds = 20;
         }
@@ -59,7 +58,7 @@
       </div>
     </div>
     {% endfor %}
-    <input type="submit" name="exam-submit" value="Submit Exam" class="btn btn-primary">
+    <input type="submit" name="exam-submit" value="Submit Exam" id="exam-submit" class="btn btn-primary">
   </form>
 </div>
 {% endblock %}

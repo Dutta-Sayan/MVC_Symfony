@@ -13,6 +13,7 @@ use Services\Student\ComputeResult;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
@@ -168,15 +169,16 @@ class StudentController extends AbstractController
    *  Redirects route to student dashboard page.
    */
   #[Route('/student/examSubmit/{examNumber}', name: 'submitExam')]
-  public function submitExam(EntityManagerInterface $em, $examNumber) :Response
+  public function submitExam(Request $request, EntityManagerInterface $em, $examNumber) :Response
   {
       $user = $this->getUser();
       $studentRoll = $user->getStudentProfile()->getRollNo();
-      $submitExam = new SubmitExam($em, $_POST, $examNumber, $studentRoll);
+      $post =$request->request->all();
+      $submitExam = new SubmitExam($em, $post, $examNumber, $studentRoll);
       $submitExam->processAnswers();
       $computeResult = new ComputeResult($em, $studentRoll);
       $computeResult->showResults();
-
+      $this->addFlash('success', 'Exam Submitted');
       return $this->redirectToRoute('student');
   }
 
