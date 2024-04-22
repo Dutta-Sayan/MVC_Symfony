@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exams{% endblock %}
+{% block javascripts %}
+  {% block importmap %}{{ importmap('admin') }}{% endblock %}
+{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<header>
+  <div class="container">
+    <h3>Welcome {{app.user.Name}}</h3>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <div class="exam-nav-bar">
+    <ul class="exam-nav-bar-list">
+      <li class="nav-item"><a href="/admin/existingExams">Existing Exams</a></li>
+      <li class="nav-item"><a href="{{ url('newExam') }}">New Exam</a></li>
+      <li class="nav-item"><a href="/{{app.user ? 'logout' : 'login'}}">{{app.user ? 'Logout' : 'Login'}}</a></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+{# <div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>/Myfiles/Symfony_practice/Project/CodingPlatform/src/Controller/AdminController.php</code></li>
+        <li>Your template at <code>/Myfiles/Symfony_practice/Project/CodingPlatform/templates/admin/index.html.twig</code></li>
+        <a href="/{{app.user ? 'logout' : 'login'}}">{{app.user ? 'Logout' : 'Login'}}</a>
+    </ul>
+</div> #}
+{% endblock %}

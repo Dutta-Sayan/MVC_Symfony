@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Exam Creation{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% endblock %}
+{% block javascripts %}
+  {% block importmap %}{{ importmap('admin') }}{% endblock %}
+{% endblock %}
+{% block body %}
+
+<div class="container exam-details">
+  <p><h3>Enter Exam Details</h3></p>
+
+  <form action="/admin/newExam" method="post">
+    <input type="hidden" name="email" value={{app.user.email}}>
+    <div class="form-row">
+      <div class="mb-3 exam-name">
+        <label for="examName" class="form-label">Exam Name</label>
+        <input type="text" name="examName" class="form-control" id="examName" placeholder="Type the exam name" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="mb-3 exam-id">
+        <label for="examId" class="form-label">Exam ID/Exam Number</label>
+        <input type="text" name="examId" class="form-control" id="examId" placeholder="Type the exam ID/Number here" required>
+      </div>
+    </div>
+  
+    <div class="form-row">
+      <label for="examDuration" class="form-label">Exam Time Limit</label>
+      <input type="range" name="examDuration" min=1 max=5 step=1 class="form-range" id="examDuration">
+      <p>Value: <output id="value"></output>hr</p>
+    </div>
+  
+
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label for="eligibilityMarks">Eligibility Marks(without % sign)</label>
+        <input type="text" name="eligibilityMarks" class="form-control" id="eligibilityMarks" placeholder="Enter only Percentage">
+      </div>
+      <div class="col-auto">
+        <label for="passingMarks">Passing Marks(without % sign)</label>
+        <input type="text" name="passingMarks" class="form-control" id="passingMarks" placeholder="Enter only Percentage">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="mb-3 creator-name">
+        <label for="creatorName" class="form-label">Enter Enter Exam Creator's Name</label>
+        <input type="text" name="creatorName" class="form-control" id="creatorName" placeholder="Enter Exam Creator's Name" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <input name="submit" class="exam-details-submit-btn" type="submit" value="Submit">
+    </div>
+  </form>
+  
+</div>
+{% endblock %}

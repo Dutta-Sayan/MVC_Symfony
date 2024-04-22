@@ -1,0 +1,86 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* background-color: aqua; */
+}
+body{
+  background-color: rgb(0, 255, 247);
+}
+.container{
+  width: 1200px;
+  margin: auto;
+}
+h2,h3,.student-info{
+  text-align: center;
+}
+.student-dashboard{
+  display: flex;
+  justify-content: space-between;
+  margin-block: 30px;
+}
+.card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+img{
+  width: 200px;
+  height: auto;
+}
+.form-input{
+  padding: 5px;
+  margin: 5px;
+}
+.info{
+  margin: 10px;
+}
+.exams-available{
+  thead{
+    font-weight: bold;
+  }
+}
+.available-exams-container{
+  margin-top: 30px;
+}
+.card{
+  background-color: rgb(50, 248, 225);
+  border-radius: 1px solid rgb(0, 195, 255);
+  box-shadow: 1px 1px 2px blue;
+}
+.card:hover{
+  box-shadow: 1px 1px 8px blue;
+  transition: ease-out;
+}
+.student-details-card{
+  background-color: rgb(68, 68, 68);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+}
+.dashboard-button{
+  margin-block: 5px;
+}
+.question{
+  margin: 10px;
+  font-size: 1.2em;
+  border: 1px solid rgba(0, 0, 0, 0.404);
+  background-color: rgb(192, 201, 255);
+  padding: 10px;
+  .choose-answer{
+    padding: 5px;
+  }
+}
+.examOver{
+  height: 200px;
+  padding: 100px;
+  text-align: center;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 5px;
+  background-color: rgba(91, 229, 181, 0.418);
+  box-shadow: 5px 5px 40px blue;
+  transform: translate(-50%, -50%);
+}

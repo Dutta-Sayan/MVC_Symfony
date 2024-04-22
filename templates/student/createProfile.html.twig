@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Profile{% endblock %}
+{% block javascripts %}
+  {% block importmap %}{{ importmap('student') }}{% endblock %}
+{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% endblock %}
+{% block body %}
+<style>
+    /* .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; } */
+</style>
+<div class="container">
+  <h2>Create Profile</h2>
+  <div class="set-profile">
+    <form action="" method="post">
+      <div class="row">
+        <div class="form-input col">
+          <label for="studentName">Your Name</label><br>
+          <input class="form-control" type="text" placeholder="{{app.user.Name}}" name="studentName" value="{{app.user.Name}}" disabled>
+        </div>
+        <div class="form-input col">
+          <label for="email">Student Email</label><br>
+          <input class="form-control" type="text" placeholder={{app.user.email}} name="email" value={{app.user.email}} disabled>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-input col">
+          <label for="age">Your Age</label><br>
+          <input class="form-control" type="number" name="age" class="age" placeholder="Minimum 20 maximum 30" min="20" max="30">
+        </div>
+        <div class="form-input col"> 
+          <label for="rollNo">Roll No</label><br>
+          <input class="form-control" type="number" name="rollNo" class="rollNo" min="1" max="100">
+        </div>
+      </div>
+      
+      <div class="row"> 
+        <div class="form-input col">
+          <label for="gradYear">Graduation Year</label><br>
+          <input class="form-control" type="number" name="gradYear" placeholder="Between 2015 and 2027" class="gradYear" min="2015" max="2027">
+        </div>
+        <div class="form-input col">
+          <label for="academicMarks">Enter academic Marks (Percentage)</label><br>
+          <input class="form-control" type="text" name="academicMarks" class="academicMarks" pattern="\(([0-9]{1,2})*\.?([0-9]{1,2})*)\">
+        </div>
+      </div>
+      <div class="form-input row">
+        <label for="resumeLink">Enter link for resume</label><br>
+        <input class="form-control" type="url" name="resumeLink" class="resumeLink">
+      </div>
+        <input class="profile-submit btn btn-success" name="submit" type="submit" value="Submit">
+      </div>
+    </form>
+    <span><a href="/student" class="btn btn-primary float-end">Go to dashboard</a></span>
+  </div>
+  
+</div>
+{# <div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>/Myfiles/Symfony_practice/Project/CodingPlatform/src/Controller/AdminController.php</code></li>
+        <li>Your template at <code>/Myfiles/Symfony_practice/Project/CodingPlatform/templates/admin/index.html.twig</code></li>
+        <a href="/{{app.user ? 'logout' : 'login'}}">{{app.user ? 'Logout' : 'Login'}}</a>
+    </ul>
+</div> #}
+{% endblock %}

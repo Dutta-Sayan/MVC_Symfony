@@ -1,0 +1,101 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+}
+.container{
+  width: 1200px;
+  margin:auto;
+}
+nav{
+  background-color: rgb(23, 23, 56);
+}
+.exam-nav-bar-list{
+  display: flex;
+  .nav-item{
+    padding-block: 10px;
+    margin-inline: 10px;
+  }
+  .nav-item:hover{
+    background-color: white;
+    a{
+      color: black;
+    }
+  }
+  .nav-item:last-child{
+    margin-left: auto;
+  }
+}
+.nav-item a{
+  display: inline-block;
+  padding: 10px;
+  color: white;
+}
+h2, h3, .set-ques{
+  text-align: center;
+  margin-block: 10px;
+  padding: 5px;
+}
+.ques-form-heading{
+  margin: 5px;
+  display: inline-block;
+}
+.answers{
+  input{
+    padding: 5px;
+    margin: 5px;
+    border-radius: 3px;
+    width: 300px;
+  }
+}
+.ques-submit{
+  padding: 8px;
+  margin: 10px;
+}
+.student-dashboard{
+  display: flex;
+}
+.exam-details{
+  background-color: rgb(191, 253, 253);
+  padding: 10px 40px 50px 40px;
+  border-radius: 15px;
+}
+.align-items-center{
+  display: flex;
+  justify-content: space-between;
+  .col-auto{
+    width: 48%;
+    margin-block: 10px;
+    input{
+      margin-block: 5px;
+    }
+  }
+}
+.exam-details-submit-btn{
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(82, 140, 211);
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+.exams-created{
+  padding: 5px;
+  margin: 20px;
+  text-align: center;
+  table{
+    width: 800px;
+    margin: auto;
+    border: 2px solid black;
+    border-collapse: collapse;
+    thead,td{
+      padding: 10px;
+      border: 1px solid black;
+    }
+    thead{
+      font-weight: bold;
+    }
+  }
+}

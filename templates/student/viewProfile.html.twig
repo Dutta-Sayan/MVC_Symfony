@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Profile{% endblock %}
+{% block javascripts %}
+  {% block importmap %}{{ importmap('student') }}{% endblock %}
+{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% endblock %}
+{% block body %}
+
+<div class="container">
+  <div class="student-info">
+    <h3>Student Details</h3>
+    <a href="/logout" class="btn btn-danger float-end">Logout</a><br>
+    <div class="card student-details-card">
+      <div class="info">
+        <span>Name: {{user.Name}}</span>
+      </div>
+      <div class="info">
+        <span>Student Email: {{user.studentEmail.email}}</span>
+      </div>
+      <div class="info">
+        <span>Age: {{user.Age}} years</span>
+      </div>
+      <div class="info">
+        <span>Roll No.:   {{user.RollNo}}</span>
+      </div>
+      <div class="info">
+        <span>Graduation Year: {{user.GraduationYear}}</span>
+      </div>
+      <div class="info">
+        <span>Academic Marks: {{user.AcademicMarks}}%</span>
+      </div>
+      <div class="info">
+        <span>resume Link: <a href="{{user.LinkToResume}}">{{user.LinkToResume}}</a></span>
+      </div>
+    </div>
+  </div>
+  <span><a href="/student" class="btn btn-primary float-end dashboard-button">Go back to dashboard</a></span>
+</div>
+{% endblock %}
