@@ -5,11 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Exam;
 use App\Entity\StudentProfile;
-use Services\Student\NewProfile;
-use Services\Student\ExamEligibility;
-use Services\Student\StartExam;
-use Services\Student\SubmitExam;
-use Services\Student\ComputeResult;
+use App\Services\Student\NewProfile;
+use App\Services\Student\ExamEligibility;
+use App\Services\Student\StartExam;
+use App\Services\Student\SubmitExam;
+use App\Services\Student\ComputeResult;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +32,6 @@ class StudentController extends AbstractController
   {
     // Shows the student dashboard only if the user is a student.
     if ($this->getUser()->getRole() == 'Student') {
-
       $studentProfile = $this->getUser()->getStudentProfile();
       // If student profile is not set, shows the email in welcome message.
       if (!$studentProfile) {
@@ -41,13 +40,15 @@ class StudentController extends AbstractController
             'name' => $this->getUser()->getEmail(),
         ]);
       // If student profile is set, shows the name in welcome message.
-      } else {
+      }
+      else {
         return $this->render('student/student.html.twig', [
           'controller_name' => 'StudentController',
           'name' => $studentProfile->getName(),
         ]);
       }
-    } else {
+    }
+    else {
       throw $this->createNotFoundException('Page does not exist');
     }
   }
@@ -70,7 +71,8 @@ class StudentController extends AbstractController
     if (!$studentProfile) {
       return $this->redirectToRoute('create_profile');
     // Displays the student details if profile is set.
-    } else {
+    }
+    else {
       $name = $studentProfile->getStudentEmail()->getEmail();
       return $this->render('student/viewProfile.html.twig', array('user'=> $studentProfile));
     }
@@ -104,7 +106,8 @@ class StudentController extends AbstractController
         $this->addFlash('success', 'Profile Set');
         return $this->redirectToRoute('student');
       // Stays on same page and shows the errors, form is not sumitted.
-      } else {
+      }
+      else {
         return $this->render('student/createProfile.html.twig', [
           'errors'=>$errors,
           'post'=>$post,
@@ -185,10 +188,9 @@ class StudentController extends AbstractController
         'ques'=>$questions,
         'duration'=>$duration,
       ]);
-    // Renders the exam Over page if result is present for the particular exam.
-    } else {
-      return $this->render('student/examOver.html.twig');
     }
+    // Renders the exam Over page if result is present for the particular exam.
+    return $this->render('student/examOver.html.twig');
   }
 
   /**
@@ -221,7 +223,7 @@ class StudentController extends AbstractController
    * Route for results page.
    *
    * @param EntityManagerInterface $em
-   *  Object of EntityManagerInterface
+   *  Object of EntityManagerInterface.
    *
    * @return Response
    *  Returns the yourResults page.
