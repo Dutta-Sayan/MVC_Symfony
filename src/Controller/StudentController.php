@@ -30,17 +30,25 @@ class StudentController extends AbstractController
   #[Route('/student', name: 'student')]
   public function index(): Response
   {
-    $studentProfile = $this->getUser()->getStudentProfile();
-    if (!$studentProfile) {
-      return $this->render('student/student.html.twig', [
+    // Shows the student dashboard only if the user is a student.
+    if ($this->getUser()->getRole() == 'Student') {
+
+      $studentProfile = $this->getUser()->getStudentProfile();
+      // If student profile is not set, shows the email in welcome message.
+      if (!$studentProfile) {
+        return $this->render('student/student.html.twig', [
+            'controller_name' => 'StudentController',
+            'name' => $this->getUser()->getEmail(),
+        ]);
+      // If student profile is set, shows the name in welcome message.
+      } else {
+        return $this->render('student/student.html.twig', [
           'controller_name' => 'StudentController',
-          'name' => $this->getUser()->getEmail(),
-      ]);
+          'name' => $studentProfile->getName(),
+        ]);
+      }
     } else {
-      return $this->render('student/student.html.twig', [
-        'controller_name' => 'StudentController',
-        'name' => $studentProfile->getName(),
-      ]);
+      throw $this->createNotFoundException('Page does not exist');
     }
   }
 
@@ -48,7 +56,7 @@ class StudentController extends AbstractController
    * Route for Student profile option.
    *
    * @param EntityManagerInterface $em
-   *  Object of EntityManagerInterface
+   *  Object of EntityManagerInterface.
    *
    * @return Response
    *  Returns the createProfile page for profile creation for first time.
@@ -58,8 +66,10 @@ class StudentController extends AbstractController
   public function profile(EntityManagerInterface $em): Response
   {
     $studentProfile = $this->getUser()->getStudentProfile();
+    // Redirects to create profile page if profile is not set.
     if (!$studentProfile) {
       return $this->redirectToRoute('create_profile');
+    // Displays the student details if profile is set.
     } else {
       $name = $studentProfile->getStudentEmail()->getEmail();
       return $this->render('student/viewProfile.html.twig', array('user'=> $studentProfile));
@@ -78,17 +88,22 @@ class StudentController extends AbstractController
   #[Route('/student/profile/createProfile', name: 'create_profile')]
   public function createProfile(Request $request, EntityManagerInterface $entityManager): Response
   {
+    // Variable to store the validation errors.
     $errors = "";
+    // Store the POST request values.
     $post = "";
     if (isset($_POST['submit'])) {
       $post = $request->request->all();
+      // Creating a object of NewProfile class.
       $newProfile = new NewProfile($post);
       $email = $this->getUser()->getEmail();
       $name = $this->getUser()->getName();
       $errors = $newProfile->processForm($entityManager, $email, $name);
+      // If no errors found, profile is set and redirects to dashboard.
       if (empty($errors)) {
         $this->addFlash('success', 'Profile Set');
         return $this->redirectToRoute('student');
+      // Stays on same page and shows the errors, form is not sumitted.
       } else {
         return $this->render('student/createProfile.html.twig', [
           'errors'=>$errors,
@@ -115,6 +130,7 @@ class StudentController extends AbstractController
   #[Route('/student/availableExams', name: 'availableExams')]
   public function availableExams(EntityManagerInterface $em): Response
   {
+    // Fetching all the records of Exam Entity.
     $exam = $em->getRepository(Exam::class)->findAll();
     return $this->render('student/availableExams.html.twig', array('exam'=> $exam));
   }
@@ -133,7 +149,9 @@ class StudentController extends AbstractController
   {
     $user = $this->getUser();
     $studentProfile = $user->getStudentProfile();
+    // Object of ExamEligibility class.
     $examEligibility = new ExamEligibility($em, $studentProfile);
+    // Stores the eligible exams based on student's academic marks.
     $exam = $examEligibility->showExams();
     return $this->render('student/eligibleExams.html.twig', array('exam'=>$exam));
   }
@@ -155,15 +173,19 @@ class StudentController extends AbstractController
   {
     $startExam = new StartExam($em, $examNumber, $this->getUser()->getStudentProfile());
     $checkResult = $startExam->checkResult();
+    // If result is not present already, then the exam will start.
     if ($checkResult == 0) {
       $examInfo = $startExam->getQuestions();
+      // Stores the questions.
       $questions = $examInfo[1];
+      // Stores the exam total duration.
       $duration = $examInfo[0];
       return $this->render('student/startExam.html.twig', [
         'examNumber'=>$examNumber,
         'ques'=>$questions,
         'duration'=>$duration,
       ]);
+    // Renders the exam Over page if result is present for the particular exam.
     } else {
       return $this->render('student/examOver.html.twig');
     }
@@ -188,10 +210,10 @@ class StudentController extends AbstractController
       $studentRoll = $user->getStudentProfile()->getRollNo();
       $post = $request->request->all();
       $submitExam = new SubmitExam($em, $post, $examNumber, $studentRoll);
+      // Processes the answers and stores the results.
       $submitExam->processAnswers();
-      $computeResult = new ComputeResult($em, $studentRoll);
-      $computeResult->showResults();
       $this->addFlash('success', 'Exam Submitted');
+      // Redirects to dashboard.
       return $this->redirectToRoute('student');
   }
 
@@ -210,6 +232,7 @@ class StudentController extends AbstractController
       $user = $this->getUser();
       $studentRoll = $user->getStudentProfile()->getRollNo();
       $computeResult = new ComputeResult($em, $studentRoll);
+      // Stores all the results for a particular student.
       $results = $computeResult->showResults();
       return $this->render('student/yourResults.html.twig', [
         'results'=>$results,
