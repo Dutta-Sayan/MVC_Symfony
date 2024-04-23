@@ -14,20 +14,16 @@
 return [
     'app' => [
         'path' => './assets/app.js',
-        'entrypoint' => true,
+        'entrypoint' => TRUE,
     ],
     'admin' => [
       'path' => './assets/admin.js',
-      'entrypoint' => true,
+      'entrypoint' => TRUE,
     ],
     'student' => [
       'path' => './assets/student.js',
-      'entrypoint' => true,
+      'entrypoint' => TRUE,
     ],
-    // 'images' => [
-    //   'path' => './assets/images',
-    //   'entrypoint' => true,
-    // ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],
