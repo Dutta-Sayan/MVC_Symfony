@@ -11,15 +11,19 @@
 }
 nav{
   background-color: rgb(23, 23, 56);
+  height: 100%;
 }
 .exam-nav-bar-list{
   display: flex;
   .nav-item{
     padding-block: 10px;
     margin-inline: 10px;
+    a{
+      text-decoration: none;
+    }
   }
   .nav-item:hover{
-    background-color: white;
+    background-color: rgb(212, 212, 97);
     a{
       color: black;
     }
@@ -97,5 +101,12 @@ h2, h3, .set-ques{
     thead{
       font-weight: bold;
     }
+  }
+}
+.dashboard-bgimg{
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
