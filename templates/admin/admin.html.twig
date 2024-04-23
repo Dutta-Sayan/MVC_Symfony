@@ -23,8 +23,12 @@
     <ul class="exam-nav-bar-list">
       <li class="nav-item"><a href="/admin/existingExams">Existing Exams</a></li>
       <li class="nav-item"><a href="{{ url('newExam') }}">New Exam</a></li>
+      <li class="nav-item"><a href="{{ url('showStudents') }}">All Students</a></li>
       <li class="nav-item"><a href="/{{app.user ? 'logout' : 'login'}}">{{app.user ? 'Logout' : 'Login'}}</a></li>
     </ul>
+    </div>
+    <div class="dashboard-bgimg">
+      <img src="{{asset ('../assets/images/admin-dashboard.jpg')}}" alt="">
     </div>
   </div>
 </nav>
