@@ -1,0 +1,46 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container{
+  width: 1200px;
+  margin: auto;
+}
+h2, .login-signup, .login-form{
+  text-align: center;
+  /* color: red; */
+}
+.login-form, .sign-up-form{
+  display:inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(180, 220, 72);
+  box-shadow: 2px 2px 2px rgb(82, 194, 82) ;
+  padding: 20px;
+}
+.input-type{
+  padding: 20px;
+  input{
+    padding: 10px;
+    height: 30px;
+    width: 300px;
+    border: 1px solid rgb(107, 177, 234);
+    margin: 5px;
+  }
+}
+.signIn, .signUp{
+  padding: 10px;
+  width: 100px;
+  margin-bottom: 5px;
+}
+.signIn:hover{
+  cursor: pointer;
+}
+.sign-up-form{
+  .input-type{
+    padding: 0px;
+  }
+}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Questions{% endblock %}
+{% block javascripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="{{asset ('../assets/createQues.js')}}"></script>
+  {% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset ('../assets/styles/admin.css')}}">
+{% endblock %}
+{% endblock %}
+{% block body %}
+<div class="container">
+  <h2>Create new Exam</h2>
+  <form action="" method="post">
+    <div class="set-ques">
+    <input type="hidden" name="examNumber" value="{{app.request.query.get('examNumber')}}">
+      <span class="set-ques-heading ques-form-heading">Add your question below</span><br>
+      <input type="text" name="slno[]" class="sl" id="slno" value="1" readonly=""><br>
+      <textarea name="ques[]" id="question" cols="30" rows="5"></textarea><br>
+      <div class="answers">
+        <span class="add-options-heading ques-form-heading">Add Options</span><br>
+        <input type="text" name="optionA[]" id="opA" placeholder="Enter first option"><br>
+        <input type="text" name="optionB[]" id="opB" placeholder="Enter second option"><br>
+        <input type="text" name="optionC[]" id="opC" placeholder="Enter third option"><br>
+        <span class="correct-answer-heading ques-form-heading">Enter correct answer</span><br>
+        <input type="text" name="answer[]" id="ans" placeholder="Enter correct answer"><br>
+        <span class="ques-marks ques-form-heading">Enter the marks for this question</span><br>
+        <input type="number" name="marks[]" id="marks" placeholder="Enter the marks"><br>
+        <button type="button" name="addRow" id="addRow" class="btn btn-success pull-right">Add Row</button>
+      </div>
+        
+        <div class="next-ques"></div>
+        <input class="btn btn-info pull-left ques-submit" name="submit" type="submit" value="Submit">
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

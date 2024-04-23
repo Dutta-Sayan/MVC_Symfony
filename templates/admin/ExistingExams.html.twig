@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Exams{% endblock %}
+{% block javascripts %}
+  {% block importmap %}{{ importmap('admin') }}{% endblock %}
+{% endblock %}
+{% block body %}
+
+<div class="container">
+  <div class="exams-created">
+    <table>
+      <thead>
+        <td>Exam Name</td>
+        <td>Exam Number</td>
+        <td>Number of Questions</td>
+        <td>Exam Duration</td>
+        <td>Passing Marks</td>
+        <td>Eligibility Marks</td>
+        <td>Created By</td>
+        <td>Operation</td>
+      </thead>
+      {% for examInfo in exam %}
+        <tr>
+          <td>{{examInfo.ExamName}}</td>
+          <td>{{examInfo.ExamNumber}}</td>
+          <td>{{noOfQues[examInfo.ExamNumber]}}</td>
+          <td>{{examInfo.ExamDuration}} hours</td>
+          <td>{{examInfo.PassingMarks}}%</td>
+          <td>{{examInfo.EligibilityMarks}}%</td>
+          <td>{{examInfo.CreatedBy}}</td>
+          <td><a href="{{path('createExam', {'examNumber':examInfo.ExamNumber})}}">Add Question</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <span><a href="/admin">Go to dashboard</a></span>
+</div>
+{% endblock %}

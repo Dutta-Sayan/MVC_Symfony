@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Coding Platform{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="CSS/style.css">{% endblock %}
+{% block body %}
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+    <h2>Welcome</h2>
+    <div class="login-signup">
+      <span><a href="/SignUp">Sign up</a> as a new user<br>
+      <a href="/Login">Login </a>as an existing user</span>
+    </div>
+  </div>
+    
+</div>
+{% endblock %}

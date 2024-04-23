@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Exam Creation{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% endblock %}
+{% block javascripts %}
+  {% block importmap %}{{ importmap('student') }}{% endblock %}
+  <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      var start = 0;
+      var batchSize = 2;
+      $("#loadStudent").on("click", function(event){
+        event.preventDefault();
+        $.ajax({
+          url:    '/admin/allStudents',
+          type:   'POST',
+          datatype: 'json',
+          async:    true,
+
+          success:  function(data, status) {
+            var end = start + batchSize;
+            var students = data.slice(start, end);
+            for(i = 0; i < students.length; i++){
+              student = students[i];
+              var e = $('<div class="card student-details-card"><div class="info"><span id="name">Name: </span></div><div class="info"><span id="email">Email: </span></div><div class="info"><span id="age">Age: </span></div><div class="info">Roll No.: <span id="roll"></span></div><div class="info"><span id="gradYear">Graduation Year: </span></div><div class="info"><span id="acadMarks">Academic Marks: </span></div><div class="info"><span>Resume Link: <a id="link"></a></span></div></div>');
+
+              $('#name', e).append(student['name']);  
+              $('#email', e).append(student['email']);
+              $('#age', e).append(student['age']);  
+              $('#roll', e).append(student['roll']);
+              $('#gradYear', e).append(student['gradYear']);  
+              $('#acadMarks', e).append(student['marks']);
+              $('#link', e).append(student['link']);
+
+              $('.student-info').append(e); 
+            }
+            start += batchSize;
+          },
+          error : function(xhr, textStatus, errorThrown) {  
+            alert('Ajax request failed.');  
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}
+{% block body %}
+
+  <div class="container">
+        <a href="/logout" class="btn btn-danger float-end">Logout</a><br>
+        <h3>Student Details</h3>
+    <div class="student-info"></div>
+    <a id = "loadStudent" class="btn btn-secondary" href = "#">Load student information</a>  
+      <span><a href="/admin" class="btn btn-primary float-end dashboard-button">Go back to dashboard</a></span>
+  </div>
+{% endblock %}
